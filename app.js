@@ -1,12 +1,13 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var user = require('./routes/user');
+const authRouter = require('./routes/authRoutes');
+const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
-var app = express();
+const app = express();
 
 const connectDB = require('./db/connect')
 require('dotenv').config()
@@ -21,15 +22,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', user);
 
+app.get('*', checkUser)
+app.use('/', authRouter);
+app.get('/choocs', requireAuth, (req, res) => res.render('choocs'))
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -39,14 +42,36 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
 const start = async () => {
-  try{
-      await connectDB(process.env.MONGO_URI)
-  }catch (error){
-      console.log(error)
+  try {
+    await connectDB(process.env.MONGO_URI)
+    app.listen(port, () =>
+      console.log(`Server is listening on port ${port}...`)
+    );
+  } catch (error) {
+    console.log(error)
   }
 }
 
 start()
 
 module.exports = app;
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%- include('partials/header'); -%>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +9,6 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
-
     <div class="form-container">
         <h2>SignUp</h2>
         <form action="/signup" method="post">
@@ -16,13 +16,57 @@
             <label for="name">Name:</label>
             <input type="text" id="name" name="username" placeholder="Enter your name" required autocomplete="off">
           </div>
+          <div class="nameerror"></div>
           <div class="form-group">
             <label for="password">password:</label>
             <input type="password" id="password" name="password" placeholder="password" required>
           </div>
+          <div class="passworderror"></div>
           <button type="submit" class="submit-btn">Submit</button>
         </form>
       </div>
     
 </body>
 </html>
+<%- include('partials/footer'); -%>
+
+<script>
+  const form = document.querySelector('form');
+  const nameError = document.querySelector('.nameerror');
+  const passwordError = document.querySelector('.passworderror');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // reset errors
+    nameError.textContent = '';
+    passwordError.textContent = '';
+
+    // get values
+    const username = form.name.value;
+    const password = form.password.value;
+    console.log(username);
+
+    try {
+      const res = await fetch('/signup', { 
+        method: 'POST', 
+        body: JSON.stringify({ username, password }),
+        headers: {'Content-Type': 'application/json'}
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data.errors) {
+        nameError.textContent = data.errors.name;
+        passwordError.textContent = data.errors.password;
+      }
+      if (data.user) {
+        location.assign('/');
+      }
+
+    }
+    catch (err) {
+      console.log(err);
+    }
+
+  });
+</script>
