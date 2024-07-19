@@ -60,6 +60,10 @@ const userLogIn = async (req, res) => {
     }
 
 }
+const GetAllGamers = async (req, res) => {
+    const users = await User.find().select({name: 1})
+    res.render('gamers', {users});
+}
 const LogOutGet = async (req, res) => {
     res.cookie('jwt', '', { maxAge: 1 })
     res.redirect('/')
@@ -78,4 +82,5 @@ module.exports = {
     LoginGet,
     SignUpGet,
     LogOutGet,
+    GetAllGamers,
 }

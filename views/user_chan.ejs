@@ -1,0 +1,13 @@
+<%- include('partials/header'); -%>
+
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<header>
+    <div class="personicon">
+        <img src="/images/jgamers.png" alt="">
+    </div>
+    <div class="personname">
+        <h1><%= username%></h1>
+    </div>
+</header>
+
+<%- include('partials/chat' ,{ title: username }) -%>

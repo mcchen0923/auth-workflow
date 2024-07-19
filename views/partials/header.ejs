@@ -19,4 +19,16 @@
       <% } %>
     </ul>
   </nav>
-  
+
+  <script>
+     var localuser = (JSON.parse('<%- JSON.stringify(user || {}) %>')).name;
+    if (localuser) {
+      console.log('User is logged in:', localuser);
+    } else {
+      console.log('User is not logged in.');
+    }
+     
+  </script>
+
+</body>
+

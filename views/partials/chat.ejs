@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  
+</head>
+
+<body>
+    <div class="chat-wrap hide">
+      <div class="chat-wrap-top">
+        <h3 id="chat-title"> <%= username%> </h3>
+
+      </div>
+      <div class="chat-wrap-main" id="chat-wrap">
+        <ul class="chat-con clearfix"  id="chat-con"></ul>
+      </div>
+      <div class="bottom">
+        <input type="text" id="sendText" placeholder="Type a message">
+        <button id="sendButton" class="sendBtn">
+          <img src="images/send.png">
+        </button>
+      </div>
+    </div>
+  </body>
+
+  <script src="/socket.io/socket.io.js"></script>
+
+  <script src="/javascripts/chat.js"></script>

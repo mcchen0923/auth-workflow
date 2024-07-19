@@ -1,0 +1,13 @@
+<%- include('partials/header'); -%>
+
+<ul>
+  <% users.forEach(user => { %>
+    <li class="gamer">
+      <img src="/images/jgamers.png" alt="">
+      <%= user.name %> - 
+      <a href="/<%= user.name %>">View Owner</a>
+    </li>
+  <% }) %>
+</ul>
+
+<%- include('partials/footer'); -%>

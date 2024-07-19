@@ -4,10 +4,14 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const authRouter = require('./routes/authRoutes');
-const { requireAuth, checkUser } = require('./middleware/authMiddleware');
-
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
+const authRouter = require('./routes/authRoutes');
+const { checkUser } = require('./middleware/authMiddleware');
+
+const chanRouter = require('./routes/chanRoutes');
 
 const connectDB = require('./db/connect')
 require('dotenv').config()
@@ -25,7 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('*', checkUser)
 app.use('/', authRouter);
-app.get('/choocs', requireAuth, (req, res) => res.render('choocs'))
+app.use('/', chanRouter);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -48,7 +53,7 @@ app.set('port', port);
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI)
-    app.listen(port, () =>
+    server.listen(port, () =>
       console.log(`Server is listening on port ${port}...`)
     );
   } catch (error) {
@@ -58,14 +63,30 @@ const start = async () => {
 
 start()
 
-module.exports = app;
+io.on('connection', (socket) => {
+  const hostname = socket.handshake.query.hostname
+
+  if (hostname) {
+    socket.join(hostname)
+    socket.emit('message',`welcome to ${hostname}'s room`)
+
+    socket.on('chat message', (msg) => {
+      console.log('Message received:', msg)
+      // 將訊息發送給所有連接的客戶端
+      io.to(hostname).emit('reveivemessage', msg)
+    })
+  }
+  socket.on('disconnect', () => {
+    console.log('User disconnected')
+  })
+})
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  var port = parseInt(val, 10)
 
   if (isNaN(port)) {
     // named pipe
-    return val;
+    return val
   }
 
   if (port >= 0) {
