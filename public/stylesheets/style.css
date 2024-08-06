@@ -4,14 +4,26 @@
   box-sizing: border-box;
 }
 
-body{
+body {
   margin: 20px 40px;
   font-size: 1.2rem;
   letter-spacing: 1px;
   background: #fafafa;
 }
 
-h1, h2, h3, h4, ul, li, a, p, input, label, button, div, footer{
+h1,
+h2,
+h3,
+h4,
+ul,
+li,
+a,
+p,
+input,
+label,
+button,
+div,
+footer {
   margin: 0;
   padding: 0;
   font-family: 'Quicksand', sans-serif;
@@ -19,25 +31,29 @@ h1, h2, h3, h4, ul, li, a, p, input, label, button, div, footer{
 }
 
 
-header{
+header {
   display: flex;
   align-items: center;
 }
-header img{
+
+header img {
   width: 350px;
   margin-right: 40px;
 }
-header h2{
+
+header h2 {
   font-size: 3em;
   margin-bottom: 10px;
 }
-header h3{
+
+header h3 {
   font-size: 1.6em;
   margin-bottom: 10px;
   margin-left: 2px;
   color: #999;
 }
-header .btn{
+
+header .btn {
   margin-top: 20px;
   padding: 12px 18px;
   text-transform: uppercase;
@@ -46,20 +62,23 @@ header .btn{
   font-size: 0.8em;
 }
 
-nav{
+nav {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 120px;
 }
-nav ul{
+
+nav ul {
   display: flex;
   align-items: center;
 }
-nav li{
+
+nav li {
   margin-left: 20px;
 }
-nav li a{
+
+nav li a {
   text-transform: uppercase;
   font-weight: 700;
   font-size: 0.8em;
@@ -67,7 +86,8 @@ nav li a{
   padding: 10px 16px;
   letter-spacing: 2px;
 }
-.btn{
+
+.btn {
   border-radius: 36px;
   background: #FEE996;
 }
@@ -133,29 +153,253 @@ p {
   margin-top: 15px;
 }
 
-footer{
+footer {
   text-align: center;
   margin-top: 120px;
   color: #aaa;
 }
 
-.choocs{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 30px;
-  row-gap: 80px;
-  margin: 80PX AUTO;
-  max-width: 1200px;
-}
-.chooc{
+.gamer {
   display: inline-block;
-  border-radius: 20px;
-  background: white;
-  position: relative;
+  vertical-align: top;
+  width: 350px;
+  height: 200px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   text-align: center;
-  padding: 0 20px 30px 20px
 }
-.chooc img{
+
+.gamer img {
   width: 100px;
-  margin: -30px auto 20px;
+  height: 100px;
+  display: block;
+  margin: 0 auto 10px;
+}
+
+
+.chat-wrap {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  width: 330px;
+  height: calc(100% - 80px);
+  overflow-y: scroll;
+  background-color: #f4f4f4;
+  text-align: center;
+  box-shadow: -1px 0 3px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+}
+
+.chat-wrap-top {
+  position: relative;
+  background-color: white;
+  box-shadow: 0px -7px 15px #c3c4dd;
+  padding: 15px;
+  text-align: left;
+}
+
+.chat-wrap-top h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #494949;
+}
+
+.leaveBtn {
+  position: absolute;
+  right: 10px;
+  top: -3px;
+  padding: 17px;
+  border: none;
+  color: #7062D1;
+  background-color: transparent;
+  font-weight: 600;
+  font-size: 20px;
+  outline: none;
+  opacity: .3;
+}
+
+.leaveBtn img {
+  width: 15px;
+}
+
+
+.leaveBtn:hover {
+  cursor: pointer;
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+
+.chat-wrap-main {
+  padding: 0 25px;
+  padding-bottom: 70px;
+}
+
+.chat-con {
+  text-align: left;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-con li {
+  text-align: left;
+  border-bottom: 1px solid #dddddd;
+}
+
+.chat-con p {
+  width: 50%;
+  padding: 5px 20px;
+  font-size: 12px;
+  border-radius: 5px;
+  margin: 15px 0;
+  color: gray;
+  border-radius: 20px;
+  opacity: .7;
+}
+
+.bottom {
+  padding: 10px;
+  background-color: #f1f1f1;
+  /* 可調整為你需要的顏色 */
+  border-top: 1px solid #ddd;
+  /* 添加頂部邊框 */
+  display: flex;
+  align-items: center;
+  /* 垂直方向置中 */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.bottom input[type="text"] {
+  flex: 1;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.bottom button {
+  padding: 5px;
+}
+
+
+.sendBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sendBtn img {
+  width: 15px;
+}
+
+.chat-item {
+  width: 100%;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.item-left .message {
+  background: #979ae5;
+  color: white;
+  font-size: 15px;
+  border-radius: 0px 15px 15px 15px;
+  margin-top: 20px;
+  padding: 15px !important;
+  font-weight: 400;
+}
+
+.item-right .message {
+  background: white;
+  color: #413177;
+  font-size: 15px;
+  font-weight: 400;
+  border-radius: 15px 0px 15px 15px;
+  padding: 15px !important;
+  margin-top: 20px;
+  margin-right: 0;
+}
+
+.item-left .uname {
+  font-size: 12px;
+  left: 0px;
+  top: 0;
+  color: gray;
+}
+
+.item-right .uname {
+  font-size: 12px;
+  right: 0px;
+  top: 0;
+  color: gray;
+}
+
+.chat-item .message {
+  display: block;
+  padding: 10px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 330px;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 比例 (9 / 16 = 0.5625) */
+}
+.video-container video,
+.video-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.live-icon {
+  width: 50px; /* 設定圖像寬度 */
+  height: 50px; /* 設定圖像高度 */
+  border-radius: 50%; /* 圓形圖像 */
+  margin: 10px; /* 圖像外邊距 */
+}
+
+#content {
+  /*display: none;  初始設置為隱藏 */
+  border: 1px solid #000;
+  padding: 5px;
+  margin-top: 10px;
+  width: fit-content;
+  height: 30px;
+  white-space: pre-wrap;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.uneditable {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}
+.mask {
+  display: inline-block;
+  width: 100%;
+  background-color: #e0e0e0;
+  padding: 10px;
+}
+#contentText {
+  white-space: nowrap; /* 禁止换行 */
+  text-overflow: ellipsis; /* 超出文本显示省略号 */
+  line-height: 30px; /* 使文本垂直居中 */
+  margin: 0; /* 去掉默认边距 */
+  display: inline-block; /* 使其按行内块元素处理 */
+  flex: 1;
 }

@@ -1,0 +1,41 @@
+<%- include('partials/header'); -%>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            <%= username %>'s Profile
+        </title>
+        <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    </head>
+
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <body>
+        <!-- 直播播放器 -->
+        <div class="container">
+            <div class="video-container">
+                <video id="video" controls></video>
+                <img id="placeholder" style="display:none;" alt="User's uploaded image">
+            </div>
+        </div>
+    </body>
+
+    <header>
+        <div class="personicon">
+            <img src="<%= typeof avatar !== 'undefined' ? `/${avatar}` : '/images/jgamers.png' %>" alt="<%= username %>'s avatar">
+        </div>
+        <div class="personname">
+            <h1>
+                <%= username%>
+            </h1>
+        </div>
+        <div id="live-status"></div>
+    </header>
+
+    <script>
+        const username = "<%= username %>";
+    </script>
+    <script src="/javascripts/chan.js"></script>
+
+    <%- include('partials/chat' ,{ title: username }) -%>

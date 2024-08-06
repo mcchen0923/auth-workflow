@@ -12,12 +12,13 @@ const UserSchema = new mongoose.Schema({
         type:String,
         required:[true,'need something'],
         minLength:6
+    },
+    streamkey:{
+        type:String,
+    },
+    avatar:{
+        type:String,
     }
-})
-
-UserSchema.pre ('save',function(next){
-    console.log("pre is here", this)
-    next()
 })
 
 module.exports = mongoose.model('User', UserSchema)
