@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const getHostnameFromUrl = () => {
-        const pathArray = window.location.pathname.split('/');
-        return pathArray[pathArray.length - 1]; // 假设用户名在 URL 的最后一部分
-    };
+        const pathArray = window.location.pathname.split('/')
+        return pathArray[pathArray.length - 1] 
+    }
 
-    const hostname = getHostnameFromUrl();
+    const hostname = getHostnameFromUrl()
 
     // 連接到 Socket.IO 服務器
     const socket = io({
@@ -33,11 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Message from server:', msg)
         message = msg.username + ": " + msg.message
         console.log(message)
-        const li = document.createElement('li');
-        li.textContent = message;
-        const chatCon = document.getElementById('chat-con');
-        chatCon.appendChild(li);
+        const li = document.createElement('li')
+        li.textContent = message
+        const chatCon = document.getElementById('chat-con')
+        chatCon.appendChild(li)
         // 讓聊天窗口自動滾動到最新訊息
-        chatCon.scrollTop = chatCon.scrollHeight;
+        chatCon.scrollTop = chatCon.scrollHeight
     })
 })

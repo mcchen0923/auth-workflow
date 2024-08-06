@@ -1,0 +1,48 @@
+<%- include('partials/header'); -%>
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      <%= user.username%>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+  </head>
+
+  <body>
+    
+    <div id="content" class="uneditable">
+      <p id="contentText">***************************************</p>
+    </div>
+    <button id="copyContentBtn">複製內容</button>
+    <button id="streamKeyBtn">顯示streamkey</button>
+
+    <h2>Upload Avatar</h2>
+
+    <header>
+      <div class="personicon">
+        <img src="<%= user.avatar ? `/${user.avatar}` : '/images/jgamers.png' %>" alt="<%= user.username %>'s avatar">
+      </div>
+      <div class="personname">
+        <h1>
+          <%= user.username%>
+        </h1>
+      </div>
+      <div id="live-status"></div>
+    </header>
+
+    <form action="/uploads/avatar" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="<%= user.name%>" value="<%= user.id%>"> <!-- 替換為實際用戶ID -->
+      <input type="file" name="avatar" accept="image/*">
+      <button type="submit">Upload</button>
+    </form>
+    <script>
+      const actualContent = '<%= user.streamkey %>'
+    </script>
+    <script src="/javascripts/profile.js"></script>
+  </body>
+
+  </html>

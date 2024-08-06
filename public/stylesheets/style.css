@@ -340,3 +340,66 @@ footer {
   display: block;
   padding: 10px;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 330px;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 比例 (9 / 16 = 0.5625) */
+}
+.video-container video,
+.video-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.live-icon {
+  width: 50px; /* 設定圖像寬度 */
+  height: 50px; /* 設定圖像高度 */
+  border-radius: 50%; /* 圓形圖像 */
+  margin: 10px; /* 圖像外邊距 */
+}
+
+#content {
+  /*display: none;  初始設置為隱藏 */
+  border: 1px solid #000;
+  padding: 5px;
+  margin-top: 10px;
+  width: fit-content;
+  height: 30px;
+  white-space: pre-wrap;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.uneditable {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}
+.mask {
+  display: inline-block;
+  width: 100%;
+  background-color: #e0e0e0;
+  padding: 10px;
+}
+#contentText {
+  white-space: nowrap; /* 禁止换行 */
+  text-overflow: ellipsis; /* 超出文本显示省略号 */
+  line-height: 30px; /* 使文本垂直居中 */
+  margin: 0; /* 去掉默认边距 */
+  display: inline-block; /* 使其按行内块元素处理 */
+  flex: 1;
+}

@@ -3,7 +3,7 @@
 <ul>
   <% users.forEach(user => { %>
     <li class="gamer">
-      <img src="/images/jgamers.png" alt="">
+      <img src="<%= user.avatar ? `/${user.avatar}` : '/images/jgamers.png' %>" alt="<%= user.username %>'s avatar">
       <%= user.name %> - 
       <a href="/<%= user.name %>">View Owner</a>
     </li>
